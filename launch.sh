@@ -5,4 +5,4 @@ docker run \
 --net my-redis-cluster \
 --name test_redis \
 -d redis redis-server \
---appendonly yes
+#--appendonly yes
