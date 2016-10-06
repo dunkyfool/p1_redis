@@ -4,9 +4,11 @@
 #docker build -t redis:$version .
 
 docker run \
--v /home/dunkyfool/Projects/p1_redis/conf:/etc/redis \
+-v /home/dunkyfool/redis/conf:/etc/redis/conf \
+-v /home/dunkyfool/redis/data:/etc/redis/data \
+-v /home/dunkyfool/redis/log:/etc/redis/log \
 -p 30001:6379 \
 --net my-redis-cluster \
 --name test_redis \
--d redis redis-server /etc/redis/redis.conf
-#--appendonly yes
+-d redis redis-server /etc/redis/conf/redis.conf \
+--logfile /etc/redis/log/redis.log
