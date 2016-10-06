@@ -60,6 +60,18 @@ def copy_check_loop(dump_rdb):
         else:
             delete(copy_name)
 
+def find_latest():
+    '''
+    Find out last created copy_rdb
+    output:
+        copy_name
+    '''
+    from os import listdir
+    from os.path import join, getctime
+    path=''
+    entries=[(getctime(join(path,f)),join(path,f)) for f in listdir(path)]
+    return sorted(entris)[-1][1]
+
 def backup():
     ############################################
     # check dump_rdb and copy_rdb exist or not #
