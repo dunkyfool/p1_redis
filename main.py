@@ -48,6 +48,9 @@ def mod_config(r):
     input:
         r:redis connction
     '''
+    # PID
+    print r.config_get('pidfile')
+
     # LOG
     print r.config_get('loglevel')
     print r.config_get('logfile')
@@ -58,6 +61,7 @@ def mod_config(r):
     print r.config_get('save')
     print r.config_get('stop-writes-on-bgsave-error')
     print r.config_get('rdbcompression')
+    print r.config_get('rdbchecksum')
     print r.config_get('dbfilename')
     print r.config_get('dir')
 
@@ -68,6 +72,8 @@ def mod_config(r):
     print r.config_get('no-appendfsync-on-rewrite')
     print r.config_get('auto-aof-rewrite-percentage')
     print r.config_get('auto-aof-rewrite-min-size')
+    print r.config_get('aof-load-truncated')
+    print r.config_get('aof-rewrite-incremental-fsync')
 
     # LIMITATION
     #maxclients 128
@@ -79,9 +85,6 @@ def mod_config(r):
 
     # SECURITY
     #requirepass foobared
-
-    # TRIVAL
-    print r.config_get('vm.overcommit_memory')
 
     #r.config_set('appendonly','no')
     #print r.config_get('appendonly')
