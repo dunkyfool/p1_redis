@@ -19,3 +19,4 @@ RUN chown redis:redis /etc/redis/conf/redis.conf
 
 # CMD
 CMD ["redis-server", "/etc/redis/conf/redis.conf"]
+#RUN sysctl vm.overcommit_memory=1

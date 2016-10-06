@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo sysctl vm.overcommit_memory=1
+
 docker run \
 -v /home/dunkyfool/redis:/mnt \
 -p 30001:6379 \
