@@ -47,7 +47,7 @@ find_latest
 echo "$(date +%Y%m%d%H%M) latest_file $latest_name" >> $LOG
 
 #echo "!diff check"
-outcome=$(diff -s dump.rdb $latest_name|rev|cut -d' ' -f1|rev)
+outcome=$(diff -s $DUMPFILE $latest_name|rev|cut -d' ' -f1|rev)
 if [ "$outcome" = "differ" ]; then
 	echo "Find current dump.rdb is different to latest backup file!" >> $LOG
 	copy_check_loop
