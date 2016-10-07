@@ -10,5 +10,9 @@ RUN touch /etc/redis/log/redis.log && chmod 755 /etc/redis/log/redis.log && chow
 ADD redis.conf /etc/redis/conf/redis.conf
 RUN chmod 755 /etc/redis/conf/redis.conf && chown redis:redis /etc/redis/conf/redis.conf
 
+# SCRIPT
+ADD backup.sh /etc/redis/backup.sh
+RUN chmod 755 /etc/redis/backup.sh && chown redis:redis /etc/redis/backup.sh
+
 # CMD
 CMD ["redis-server", "/etc/redis/conf/redis.conf"]
