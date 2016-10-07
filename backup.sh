@@ -34,21 +34,25 @@ find_latest() {
 ######################################################
 #                      Main                          #
 ######################################################
-#echo "!dump.rdb check"
-[[ ! -e $DUMPFILE ]] && echo "$(date +%Y%m%d%H%M) dump.rdb did not exist!" >> $LOG && redis-cli bgsave
+while true;
+do
+	#echo "!dump.rdb check"
+	[[ ! -e $DUMPFILE ]] && echo "$(date +%Y%m%d%H%M) dump.rdb did not exist!" >> $LOG && redis-cli bgsave
 
-#echo "!latest backup check"
-find_latest
-if [ "$latest_name" = "" ]; then
-	echo "$(date +%Y%m%d%H%M) No backup file" >> $LOG
-	copy_check_loop
-fi
-find_latest
-echo "$(date +%Y%m%d%H%M) latest_file $latest_name" >> $LOG
+	#echo "!latest backup check"
+	find_latest
+	if [ "$latest_name" = "" ]; then
+		echo "$(date +%Y%m%d%H%M) No backup file" >> $LOG
+		copy_check_loop
+	fi
+	find_latest
+	echo "$(date +%Y%m%d%H%M) latest_file $latest_name" >> $LOG
 
-#echo "!diff check"
-outcome=$(diff -s $DUMPFILE $latest_name|rev|cut -d' ' -f1|rev)
-if [ "$outcome" = "differ" ]; then
-	echo "Find current dump.rdb is different to latest backup file!" >> $LOG
-	copy_check_loop
-fi
+	#echo "!diff check"
+	outcome=$(diff -s $DUMPFILE $latest_name|rev|cut -d' ' -f1|rev)
+	if [ "$outcome" = "differ" ]; then
+		echo "Find current dump.rdb is different to latest backup file!" >> $LOG
+		copy_check_loop
+	fi
+	sleep 10
+done
