@@ -9,3 +9,5 @@ docker run \
 --name test_redis \
 -d redis:backup #redis-server /etc/redis/conf/redis.conf #\
 #--logfile /etc/redis/log/redis.log
+
+docker exec test_redis /etc/redis/backup.sh &
